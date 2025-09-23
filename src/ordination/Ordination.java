@@ -10,12 +10,17 @@ public abstract class Ordination {
     private LocalDate slutDato;
     // link Ordination --> 0..1 Lægemiddel
     private @Nullable Lægemiddel lægemiddel;
+
     public LocalDate getStartDato() {
         return startDato;
     }
 
     public LocalDate getSlutDato() {
         return slutDato;
+    }
+
+    public @Nullable Lægemiddel getLægemiddel() {
+        return lægemiddel;
     }
 
     /**
