@@ -1,12 +1,15 @@
 package ordination;
 
+import org.jspecify.annotations.Nullable;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public abstract class Ordination {
-    private final LocalDate startDato;
-    private final LocalDate slutDato;
-
+    private LocalDate startDato;
+    private LocalDate slutDato;
+    // link Ordination --> 0..1 Lægemiddel
+    private @Nullable Lægemiddel lægemiddel;
     public LocalDate getStartDato() {
         return startDato;
     }
