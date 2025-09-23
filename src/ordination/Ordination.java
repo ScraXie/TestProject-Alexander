@@ -23,6 +23,10 @@ public abstract class Ordination {
         return lægemiddel;
     }
 
+    public void setLægemiddel(@Nullable Lægemiddel lægemiddel) {
+        this.lægemiddel = lægemiddel;
+    }
+
     /**
      * Returner antal hele dage mellem startdato og slutdato
      * (begge dage inklusive).
