@@ -11,6 +11,12 @@ public abstract class Ordination {
     // link Ordination --> 0..1 Lægemiddel
     private @Nullable Lægemiddel lægemiddel;
 
+    public Ordination(LocalDate startDato, LocalDate slutDato, @Nullable Lægemiddel lægemiddel) {
+        this.startDato = startDato;
+        this.slutDato = slutDato;
+        this.lægemiddel = lægemiddel;
+    }
+
     public LocalDate getStartDato() {
         return startDato;
     }
