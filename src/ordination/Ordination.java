@@ -23,6 +23,14 @@ public abstract class Ordination {
         return lægemiddel;
     }
 
+    public void setStartDato(LocalDate startDato) {
+        this.startDato = startDato;
+    }
+
+    public void setSlutDato(LocalDate slutDato) {
+        this.slutDato = slutDato;
+    }
+
     public void setLægemiddel(@Nullable Lægemiddel lægemiddel) {
         this.lægemiddel = lægemiddel;
     }

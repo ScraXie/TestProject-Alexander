@@ -1,17 +1,27 @@
 package ordination;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DagligSkæv extends Ordination {
     private List<Dosis> alleDosis = new ArrayList<>();
 
-    public DagligSkæv(List<Dosis> alleDosis) {
-        this.alleDosis = alleDosis;
+    public DagligSkæv() {
+        super();
     }
 
     public List<Dosis> getAlleDosis() {
         return alleDosis;
+    }
+
+    public void addDosis(Dosis dosis) {
+        alleDosis.add(dosis);
+    }
+
+    public void createDosis(LocalTime tid, double antal) {
+        Dosis dosis = new Dosis(tid, antal);
+        alleDosis.add(dosis);
     }
 
     @Override

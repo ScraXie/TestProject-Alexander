@@ -3,7 +3,6 @@ package controller;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
 import ordination.*;
 import storage.Storage;
 
@@ -58,7 +57,32 @@ public abstract class Controller {
             LocalDate startDen, LocalDate slutDen, Patient patient, Lægemiddel lægemiddel,
             LocalTime[] klokkeSlet, double[] antalEnheder) {
 
-        return null;
+        if (startDen.isAfter(slutDen)) {
+            throw new IllegalArgumentException("Startdato er efter slutdato");
+        }
+
+        if (antalEnheder.length != klokkeSlet.length) {
+            throw new IllegalArgumentException("Antallet af elementer i klokkeSlet " +
+                    "og antalEnheder er forskellige");
+        }
+
+        for (double antal : antalEnheder) {
+            if (antal < 0) {
+                throw new IllegalArgumentException("Antal enheder skal være >= 0");
+            }
+        }
+
+        DagligSkæv nyDagligSkæv = new DagligSkæv();
+        nyDagligSkæv.setLægemiddel(lægemiddel);
+        nyDagligSkæv.setStartDato(startDen);
+        nyDagligSkæv.setSlutDato(slutDen);
+
+        for (int i = 0; i < klokkeSlet.length; i++) {
+            nyDagligSkæv.createDosis(klokkeSlet[i], antalEnheder[i]);
+        }
+
+        patient.addOrdination(nyDagligSkæv);
+        return nyDagligSkæv;
     }
 
     /**
