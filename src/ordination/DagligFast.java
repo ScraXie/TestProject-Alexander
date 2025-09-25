@@ -7,10 +7,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DagligFast extends Ordination {
-    private Array [] alleDosis = new Array[4];
+    private Dosis [] alleDosis = new Dosis[4];
 
-    public DagligFast(LocalDate startDato, LocalDate slutDato, @Nullable Lægemiddel lægemiddel, Array[] alleDosis) {
+    public DagligFast(LocalDate startDato, LocalDate slutDato, @Nullable Lægemiddel lægemiddel) {
         super(startDato, slutDato, lægemiddel);
+
+    }
+
+    public void setAlleDosis(Dosis[] alleDosis) {
         this.alleDosis = alleDosis;
     }
 
@@ -38,4 +42,6 @@ public class DagligFast extends Ordination {
     public String getType() {
         return "DagligFast";
     }
+
+
 }

@@ -127,7 +127,7 @@ public class OrdinationDetailsPane extends GridPane {
         txtType.setText(ordination.getType());
         txtStarttid.setText(ordination.getStartDato().toString());
         txtSluttid.setText(ordination.getSlutDato().toString());
-        txtLægemiddel.setText(ordination.getLaegemiddel().toString());
+        txtLægemiddel.setText(String.valueOf(ordination.getLægemiddel()));
         txtDøgndosis.setText(ordination.døgnDosis() + "");
         txtTotalDosis.setText(ordination.samletDosis() + "");
     }

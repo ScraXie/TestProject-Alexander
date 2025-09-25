@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -40,9 +41,26 @@ public abstract class Controller {
     public static DagligFast opretDagligFastOrdination(
             LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel,
             double morgenAntal, double middagAntal, double aftenAntal, double natAntal) {
+        Dosis [] dosis1 = new Dosis[4];
+
+        DagligFast ordination1 = new DagligFast(startDato, slutDato, lægemiddel);
+        patient.addOrdination(ordination1);
+
+        dosis1 [0] = new Dosis(LocalTime.of(8, 0), morgenAntal);
+        dosis1 [1] = new Dosis(LocalTime.of(12, 0), middagAntal);
+        dosis1 [2] = new Dosis(LocalTime.of(18, 0), aftenAntal);
+        dosis1 [3] = new Dosis(LocalTime.of(23, 0), natAntal);
+        ordination1.setAlleDosis(dosis1);
 
 
-        return null;
+
+
+
+
+
+
+
+        return ordination1;
     }
 
     /**
