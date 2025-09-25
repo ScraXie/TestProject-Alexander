@@ -53,13 +53,6 @@ public abstract class Controller {
         ordination1.setAlleDosis(dosis1);
 
 
-
-
-
-
-
-
-
         return ordination1;
     }
 
@@ -117,8 +110,20 @@ public abstract class Controller {
      * (afhænger af patientens vægt).
      */
     public static double anbefaletDosisPrDøgn(Patient patient, Lægemiddel lægemiddel) {
-        return 0;
+        double dosis = 0;
+        if (patient.getVægt() < 25) {
+            dosis = lægemiddel.getEnhedPrKgPrDøgnLet()* patient.getVægt();
+        }
+        else if (patient.getVægt() > 120) {
+            dosis = lægemiddel.getEnhedPrKgPrDøgnTung()* patient.getVægt();
+        }
+
+        else {
+            dosis = lægemiddel.getEnhedPrKgPrDøgnNormal()* patient.getVægt();
+        }
+        return dosis;
     }
+
 
     /** Returner antal ordinationer for det givne vægtinterval og det givne lægemiddel. */
     public static int antalOrdinationerPrVægtPrLægemiddel(
