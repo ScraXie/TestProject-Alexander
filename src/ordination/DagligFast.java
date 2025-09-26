@@ -1,10 +1,7 @@
 package ordination;
 
 import org.jspecify.annotations.Nullable;
-
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class DagligFast extends Ordination {
     private Dosis [] alleDosis = new Dosis[4];
