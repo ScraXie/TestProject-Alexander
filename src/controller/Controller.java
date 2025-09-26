@@ -26,7 +26,7 @@ public abstract class Controller {
         if (startDato.isAfter(slutDato)) {
             throw new IllegalArgumentException("Startdato er efter slutdato");
         }
-        PN nyPn = new PN(antal);
+        PN nyPn = new PN(startDato, slutDato, lægemiddel, antal);
         patient.addOrdination(nyPn);
         nyPn.setLægemiddel(lægemiddel);
         return nyPn;
@@ -102,7 +102,11 @@ public abstract class Controller {
      * kastes en IllegalArgumentException.
      */
     public static void anvendOrdinationPN(PN ordination, LocalDate dato) {
-//ALEX
+        if (dato.isBefore(ordination.getStartDato()) || dato.isAfter(ordination.getSlutDato())) {
+            throw  new IllegalArgumentException("Dato skal være indenfor ordination");
+        } else {
+            ordination.anvendDosis(dato);
+        }
     }
 
     /**
@@ -111,10 +115,10 @@ public abstract class Controller {
      */
     public static double anbefaletDosisPrDøgn(Patient patient, Lægemiddel lægemiddel) {
         double dosis = 0;
-        if (patient.getVægt() < 25) {
+        if (patient.getVægt() <= 25) {
             dosis = lægemiddel.getEnhedPrKgPrDøgnLet()* patient.getVægt();
         }
-        else if (patient.getVægt() > 120) {
+        else if (patient.getVægt() >= 120) {
             dosis = lægemiddel.getEnhedPrKgPrDøgnTung()* patient.getVægt();
         }
 
@@ -172,6 +176,8 @@ public abstract class Controller {
         opretPatient("050972-1233", "Hans Jørgensen", 89.4);
         opretPatient("011064-1522", "Ulla Nielsen", 59.9);
         Patient ib = opretPatient("090149-2529", "Ib Hansen", 87.7);
+        Patient vic = opretPatient("021202-9992", "Victoria Svendson", 128.5);
+        Patient alex = opretPatient("110502-9993", "Alexander Nielsen", 20);
 
         Lægemiddel acetylsalicylsyre = opretLægemiddel(
                 "Acetylsalicylsyre", 0.1, 0.15,
@@ -182,9 +188,15 @@ public abstract class Controller {
         Lægemiddel fucidin = opretLægemiddel(
                 "Fucidin", 0.025, 0.025,
                 0.025, "Styk");
-        opretLægemiddel(
+        Lægemiddel methotrexate = opretLægemiddel(
                 "Methotrexate", 0.01, 0.015,
                 0.02, "Styk");
+
+        opretPNOrdination(LocalDate.parse("2020-01-01"), LocalDate.parse("2020-01-12"),
+                vic, fucidin, 5);
+
+        opretPNOrdination(LocalDate.parse("2020-01-13"), LocalDate.parse("2020-01-12"),
+                alex, acetylsalicylsyre, 3);
 
         opretPNOrdination(LocalDate.parse("2019-01-01"), LocalDate.parse("2019-01-12"),
                 jane, paracetamol, 123);

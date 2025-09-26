@@ -1,5 +1,8 @@
 package ordination;
 
+import org.jspecify.annotations.Nullable;
+
+import java.lang.reflect.AnnotatedArrayType;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +11,8 @@ public class PN extends Ordination{
     private double antalEnheder;
     private List<LocalDate> datoerForAnvendelse = new ArrayList<>();
 
-    public PN(double antalEnheder) {
+    public PN(LocalDate startDato, LocalDate slutDato, @Nullable Lægemiddel lægemiddel, double antalEnheder) {
+        super(startDato, slutDato, lægemiddel);
         this.antalEnheder = antalEnheder;
     }
 
