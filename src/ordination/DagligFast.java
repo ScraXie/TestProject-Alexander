@@ -15,6 +15,10 @@ public class DagligFast extends Ordination {
         this.alleDosis = alleDosis;
     }
 
+    public Dosis[] getAlleDosis() {
+        return alleDosis;
+    }
+
     @Override
     public double samletDosis() {
         double dosis = 0;

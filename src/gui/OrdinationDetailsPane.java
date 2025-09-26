@@ -151,7 +151,7 @@ public class OrdinationDetailsPane extends GridPane {
     public void setSkæv(DagligSkæv skæv) {
         textAreaSkæv.clear();
         this.add(textAreaSkæv, 0, 6, 2, 1);
-        for (Dosis d : skæv.getDoser()) {
+        for (Dosis d : skæv.getAlleDosis()) {
             textAreaSkæv.appendText(d.toString() + "\n");
         }
     }
