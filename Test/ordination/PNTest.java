@@ -43,7 +43,7 @@ class PNTest {
     }
 
     @Test
-    void samletDosis() {
+    void samletDosis2EnhederPrGang() {
         // arrange
         Lægemiddel paracetamol = new Lægemiddel("Paracetamol", 1, 1.5, 2, "mg");
         PN pn = new PN(LocalDate.of(2023, 9, 1), LocalDate.of(2023, 9, 5), paracetamol, 2);
