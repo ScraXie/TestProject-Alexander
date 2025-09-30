@@ -191,7 +191,7 @@ public abstract class Controller {
         opretPNOrdination(LocalDate.parse("2020-01-01"), LocalDate.parse("2020-01-12"),
                 vic, fucidin, 5);
 
-        opretPNOrdination(LocalDate.parse("2020-01-13"), LocalDate.parse("2020-01-12"),
+        opretPNOrdination(LocalDate.parse("2020-01-12"), LocalDate.parse("2020-01-13"),
                 alex, acetylsalicylsyre, 3);
 
         opretPNOrdination(LocalDate.parse("2019-01-01"), LocalDate.parse("2019-01-12"),
@@ -203,8 +203,10 @@ public abstract class Controller {
         opretPNOrdination(LocalDate.parse("2019-01-20"), LocalDate.parse("2019-01-25"),
                 ib, fucidin, 5);
 
-        opretPNOrdination(LocalDate.parse("2019-01-01"), LocalDate.parse("2019.01-12"),
+        opretPNOrdination(LocalDate.parse("2019-01-01"), LocalDate.parse("2019-01-12"),
                 jane, paracetamol, 123);
+        opretPNOrdination(LocalDate.parse("2019-01-01"), LocalDate.parse("2019-01-12"),
+                jane, methotrexate, 123);
 
 
         opretDagligFastOrdination(LocalDate.parse("2019-01-10"), LocalDate.parse("2019-01-12"),
