@@ -3,11 +3,18 @@ package controller;
 import ordination.Dosis;
 import ordination.Lægemiddel;
 import ordination.Patient;
+import org.junit.jupiter.api.BeforeEach;
+import storage.Storage;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ControllerTest {
+
+    @BeforeEach
+    void setUp() {
+        Controller.setStorage(new Storage());
+    }
 
     @org.junit.jupiter.api.Test
     void anbefaletDosisPrDøgnLetAlexanderAcetylsalicylsyre() {
@@ -168,19 +175,154 @@ class ControllerTest {
         assertEquals(0.951, dosis, 0.01);
     }
 
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel0Til25Acetylsalicylsyre() {
+        // arrange
+        Lægemiddel acetylsalicylsyre = Controller.opretLægemiddel("Acetylsalicylsyre"
+                , 0.01, 0.015, 0.02, "Styk");
 
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, acetylsalicylsyre);
 
+        // assert
+        assertEquals(1, antal);
+    }
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel0Til25Paracetamol() {
+        // arrange
+        Lægemiddel paracetamol = Controller.opretLægemiddel("Paracetamol"
+                , 0.01, 0.015, 0.02, "Styk");
 
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, paracetamol);
 
-
-
-
-
-
-
-
+        // assert
+        assertEquals(0, antal);
+    }
 
     @org.junit.jupiter.api.Test
-    void antalOrdinationerPrVægtPrLægemiddel() {
+    void antalOrdinationerPrVægtPrLægemiddel0Til25fucidin() {
+        // arrange
+        Lægemiddel fucidin = Controller.opretLægemiddel("Fucidin"
+                , 0.01, 0.015, 0.02, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, fucidin);
+
+        // assert
+        assertEquals(0, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel0Til25Methotrexate() {
+        // arrange
+        Lægemiddel methotrexate = Controller.opretLægemiddel("Methotrexate"
+                , 0.01, 0.015, 0.02, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, methotrexate);
+
+        // assert
+        assertEquals(0, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel26Til119Acetylsalicylsyre() {
+        // arrange
+        Lægemiddel acetylsalicylsyre = Controller.opretLægemiddel("Acetylsalicylsyre"
+                , 0.01, 0.015, 0.02, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(26, 119, acetylsalicylsyre);
+
+        // assert
+        assertEquals(1, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel26Til119Paracetamol() {
+        // arrange
+        Lægemiddel paracetamol = Controller.opretLægemiddel("Paracetamol"
+                , 0.01, 0.015, 0.02, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, paracetamol);
+
+        // assert
+        assertEquals(2, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel26Til119Fucidin() {
+        // arrange
+        Lægemiddel fucidin = Controller.opretLægemiddel("Fucidin"
+                , 0.01, 0.015, 0.02, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, fucidin);
+
+        // assert
+        assertEquals(3, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel26Til119Methotrexate() {
+        // arrange
+        Lægemiddel methotrexate = Controller.opretLægemiddel("Methotrexate"
+                , 0.01, 0.015, 0.02, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, methotrexate);
+
+        // assert
+        assertEquals(0, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel120Til300Acetylsalicylsyre() {
+        // arrange
+        Lægemiddel acetylsalicylsyre = Controller.opretLægemiddel("Acetylsalicylsyre", 0.1, 0.15, 0.16, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(120, 300, acetylsalicylsyre);
+
+        // assert
+        assertEquals(0, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel120Til300Paracetamol() {
+        // arrange
+        Lægemiddel paracetamol = Controller.opretLægemiddel("Paracetamol", 0.01, 0.015, 0.02, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, paracetamol);
+
+        // assert
+        assertEquals(0, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel120Til300Fucidin() {
+        // arrange
+        Lægemiddel fucidin = Controller.opretLægemiddel("Fucidin", 0.025, 0.025, 0.025, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(120, 300, fucidin);
+
+        // assert
+        assertEquals(1, antal);
+    }
+
+    @org.junit.jupiter.api.Test
+    void antalOrdinationerPrVægtPrLægemiddel120Til300Methotrexate() {
+        // arrange
+        Lægemiddel methotrexate = Controller.opretLægemiddel("Methotrexate", 0.01, 0.015, 0.02, "Styk");
+
+        // act
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(120, 300, methotrexate);
+
+        // assert
+        assertEquals(0, antal);
     }
 }
