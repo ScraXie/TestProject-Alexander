@@ -2,9 +2,13 @@ package controller;
 
 import ordination.Dosis;
 import ordination.Lægemiddel;
+import ordination.Ordination;
 import ordination.Patient;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import storage.Storage;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +18,7 @@ class ControllerTest {
     @BeforeEach
     void setUp() {
         Controller.setStorage(new Storage());
+
     }
 
     @org.junit.jupiter.api.Test
@@ -178,8 +183,11 @@ class ControllerTest {
     @org.junit.jupiter.api.Test
     void antalOrdinationerPrVægtPrLægemiddel0Til25Acetylsalicylsyre() {
         // arrange
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 20);
         Lægemiddel acetylsalicylsyre = Controller.opretLægemiddel("Acetylsalicylsyre"
                 , 0.01, 0.015, 0.02, "Styk");
+        Ordination alexOrd = Controller.opretPNOrdination(LocalDate.parse("2020-01-12"),
+                LocalDate.parse("2020-01-13"), alex, acetylsalicylsyre, 3);
 
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, acetylsalicylsyre);
@@ -192,6 +200,7 @@ class ControllerTest {
         // arrange
         Lægemiddel paracetamol = Controller.opretLægemiddel("Paracetamol"
                 , 0.01, 0.015, 0.02, "Styk");
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 20);
 
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, paracetamol);
@@ -201,10 +210,12 @@ class ControllerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void antalOrdinationerPrVægtPrLægemiddel0Til25fucidin() {
+    void antalOrdinationerPrVægtPrLægemiddel0Til25Fucidin() {
         // arrange
         Lægemiddel fucidin = Controller.opretLægemiddel("Fucidin"
                 , 0.01, 0.015, 0.02, "Styk");
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 20);
+
 
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, fucidin);
@@ -218,6 +229,7 @@ class ControllerTest {
         // arrange
         Lægemiddel methotrexate = Controller.opretLægemiddel("Methotrexate"
                 , 0.01, 0.015, 0.02, "Styk");
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 20);
 
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, methotrexate);
@@ -231,6 +243,9 @@ class ControllerTest {
         // arrange
         Lægemiddel acetylsalicylsyre = Controller.opretLægemiddel("Acetylsalicylsyre"
                 , 0.01, 0.015, 0.02, "Styk");
+        Patient jane = Controller.opretPatient("10101010", "jane", 63.4);
+        Ordination janeOrd = Controller.opretPNOrdination(LocalDate.parse("2020-01-12"),
+                LocalDate.parse("2020-01-13"), jane, acetylsalicylsyre, 3);
 
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(26, 119, acetylsalicylsyre);
@@ -244,9 +259,14 @@ class ControllerTest {
         // arrange
         Lægemiddel paracetamol = Controller.opretLægemiddel("Paracetamol"
                 , 0.01, 0.015, 0.02, "Styk");
+        Patient jane = Controller.opretPatient("10101010", "Jane", 63.4);
+        Ordination alexOrd = Controller.opretPNOrdination(LocalDate.parse("2020-01-12"),
+                LocalDate.parse("2020-01-13"), jane, paracetamol, 3);
+        Ordination alexOrd2 = Controller.opretPNOrdination(LocalDate.parse("2020-01-12"),
+                LocalDate.parse("2020-01-19"), jane, paracetamol, 3);
 
         // act
-        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, paracetamol);
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(26, 119, paracetamol);
 
         // assert
         assertEquals(2, antal);
@@ -257,12 +277,15 @@ class ControllerTest {
         // arrange
         Lægemiddel fucidin = Controller.opretLægemiddel("Fucidin"
                 , 0.01, 0.015, 0.02, "Styk");
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 70);
+        Ordination ord = Controller.opretPNOrdination(LocalDate.parse("2020-01-12"),
+                LocalDate.parse("2020-01-19"), alex, fucidin, 3);
 
         // act
-        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, fucidin);
+        int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(26, 119, fucidin);
 
         // assert
-        assertEquals(3, antal);
+        assertEquals(1, antal);
     }
 
     @org.junit.jupiter.api.Test
@@ -270,6 +293,7 @@ class ControllerTest {
         // arrange
         Lægemiddel methotrexate = Controller.opretLægemiddel("Methotrexate"
                 , 0.01, 0.015, 0.02, "Styk");
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 20);
 
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, methotrexate);
@@ -282,7 +306,7 @@ class ControllerTest {
     void antalOrdinationerPrVægtPrLægemiddel120Til300Acetylsalicylsyre() {
         // arrange
         Lægemiddel acetylsalicylsyre = Controller.opretLægemiddel("Acetylsalicylsyre", 0.1, 0.15, 0.16, "Styk");
-
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 20);
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(120, 300, acetylsalicylsyre);
 
@@ -294,6 +318,7 @@ class ControllerTest {
     void antalOrdinationerPrVægtPrLægemiddel120Til300Paracetamol() {
         // arrange
         Lægemiddel paracetamol = Controller.opretLægemiddel("Paracetamol", 0.01, 0.015, 0.02, "Styk");
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 20);
 
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(0, 25, paracetamol);
@@ -306,7 +331,9 @@ class ControllerTest {
     void antalOrdinationerPrVægtPrLægemiddel120Til300Fucidin() {
         // arrange
         Lægemiddel fucidin = Controller.opretLægemiddel("Fucidin", 0.025, 0.025, 0.025, "Styk");
-
+        Patient vic = Controller.opretPatient("10101010", "Victoria", 128.5);
+        Ordination ord = Controller.opretPNOrdination(LocalDate.parse("2020-01-12"),
+                LocalDate.parse("2020-01-19"), vic, fucidin, 3);
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(120, 300, fucidin);
 
@@ -318,6 +345,7 @@ class ControllerTest {
     void antalOrdinationerPrVægtPrLægemiddel120Til300Methotrexate() {
         // arrange
         Lægemiddel methotrexate = Controller.opretLægemiddel("Methotrexate", 0.01, 0.015, 0.02, "Styk");
+        Patient alex = Controller.opretPatient("10101010", "Alexander Nielsen", 20);
 
         // act
         int antal = Controller.antalOrdinationerPrVægtPrLægemiddel(120, 300, methotrexate);

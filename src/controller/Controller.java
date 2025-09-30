@@ -219,5 +219,7 @@ public abstract class Controller {
         double[] an = {0.5, 1, 2.5, 3};
         opretDagligSkævOrdination(LocalDate.parse("2019-01-23"), LocalDate.parse("2019-01-24"),
                 finn, fucidin, kl, an);
+
+
     }
 }
