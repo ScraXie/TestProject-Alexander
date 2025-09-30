@@ -7,46 +7,68 @@ import static org.junit.jupiter.api.Assertions.*;
 class PNTest {
     private PN opretPN() {
         Lægemiddel paracetamol = new Lægemiddel("Paracetamol", 1, 1.5, 2, "mg");
-        PN pn = new PN(LocalDate.of(2023, 9, 1), LocalDate.of(2023, 9, 5), paracetamol, 2);
-        return pn;
+        PN nyPn = new PN(LocalDate.of(2023, 9, 1), LocalDate.of(2023, 9, 5), paracetamol, 2);
+        return nyPn;
     }
 
     @Test
     void anvendDosis() {
-        PN pn = opretPN();
+        // arrange
+        Lægemiddel paracetamol = new Lægemiddel("Paracetamol", 1, 1.5, 2, "mg");
+        PN pn = new PN(LocalDate.of(2023, 9, 1), LocalDate.of(2023, 9, 5), paracetamol, 2);
+
+        // act
         pn.anvendDosis(LocalDate.of(2023, 9, 1));
         pn.anvendDosis(LocalDate.of(2023, 9, 2));
+        int antal = pn.antalGangeAnvendt();
 
-        assertEquals(2, pn.antalGangeAnvendt(), "Der bør være registreret 2 doser.");
+        // assert
+        assertEquals(2, antal);
     }
 
     @Test
     void antalGangeAnvendt() {
-        PN pn = opretPN();
+        // arrange
+        Lægemiddel paracetamol = new Lægemiddel("Paracetamol", 1, 1.5, 2, "mg");
+        PN pn = new PN(LocalDate.of(2023, 9, 1), LocalDate.of(2023, 9, 5), paracetamol, 2);
+
+        // act
         pn.anvendDosis(LocalDate.of(2023, 9, 1));
         pn.anvendDosis(LocalDate.of(2023, 9, 2));
         pn.anvendDosis(LocalDate.of(2023, 9, 4));
+        int antal = pn.antalGangeAnvendt();
 
-        assertEquals(3, pn.antalGangeAnvendt(), "Forventet 3 registreringer af dosis.");
+        // assert
+        assertEquals(3, antal);
     }
 
     @Test
     void samletDosis() {
-        PN pn = opretPN();
+        // arrange
+        Lægemiddel paracetamol = new Lægemiddel("Paracetamol", 1, 1.5, 2, "mg");
+        PN pn = new PN(LocalDate.of(2023, 9, 1), LocalDate.of(2023, 9, 5), paracetamol, 2);
+
+        // act
         pn.anvendDosis(LocalDate.of(2023, 9, 1));
         pn.anvendDosis(LocalDate.of(2023, 9, 2));
+        double samlet = pn.samletDosis();
 
-        // 2 enheder pr gang × 2 gange = 4.0
-        assertEquals(4.0, pn.samletDosis(), 0.001, "Samlet dosis bør være 4.0");
+        // assert
+        assertEquals(4.0, samlet, 0.001);
     }
 
     @Test
     void døgnDosis() {
-        PN pn = opretPN();
+        // arrange
+        Lægemiddel paracetamol = new Lægemiddel("Paracetamol", 1, 1.5, 2, "mg");
+        PN pn = new PN(LocalDate.of(2023, 9, 1), LocalDate.of(2023, 9, 5), paracetamol, 2);
+
+        // act
         pn.anvendDosis(LocalDate.of(2023, 9, 1));
         pn.anvendDosis(LocalDate.of(2023, 9, 2));
+        double døgnDosis = pn.døgnDosis();
 
-        // samlet dosis = 4.0, antal dage = 5 (1. sep - 5. sep inkl.)
-        assertEquals(0.8, pn.døgnDosis(), 0.001, "Døgndosis bør være 0.8");
+        // assert
+        assertEquals(0.8, døgnDosis, 0.001);
     }
 }
