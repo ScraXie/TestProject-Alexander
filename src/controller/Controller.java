@@ -163,6 +163,7 @@ public abstract class Controller {
         Lægemiddel lm = new Lægemiddel(navn, enhedPrKgPrDøgnLet,
                 enhedPrKgPrDøgnNormal, enhedPrKgPrDøgnTung, enhed);
         storage.storeLægemiddel(lm);
+
         return lm;
     }
 
