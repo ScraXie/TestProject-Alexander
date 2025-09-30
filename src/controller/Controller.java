@@ -134,7 +134,7 @@ public abstract class Controller {
 
             if (vægt >= vægtStart && vægt <= vægtSlut) {
                 for (Ordination ordination : patient.getOrdinationer()) {
-                    if (ordination.getLægemiddel() == lægemiddel) {
+                    if (ordination.getLægemiddel().equals(lægemiddel)) {
                         antal++;
                     }
                 }

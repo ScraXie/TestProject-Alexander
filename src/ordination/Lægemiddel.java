@@ -20,7 +20,9 @@ public class Lægemiddel {
     public String getEnhed() {
         return enhed;
     }
-
+    public String getNavn() {
+        return navn;
+    }
     public double getEnhedPrKgPrDøgnLet() {
         return enhedPrKgPrDøgnLet;
     }
